@@ -34,7 +34,8 @@ export class CreateUserDto {
   @ApiProperty({
     required: true,
     description: 'The role of the user',
-    example: 'admin',
+    example: 'STUDENT',
+    enum: ['ADMIN', 'STUDENT'],
   })
   role: string;
 
