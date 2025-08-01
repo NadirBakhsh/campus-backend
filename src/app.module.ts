@@ -11,8 +11,8 @@ import { AuthModule } from './auth/auth.module';
 const ENV = process.env.NODE_ENV || 'development';
 @Module({
   imports: [
-    UsersModule,
     AuthModule,
+    UsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
       // envFilePath: ['.env.development', '.env.production'],
