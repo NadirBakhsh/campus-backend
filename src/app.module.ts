@@ -1,25 +1,24 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
-import { AuthModule } from './auth/auth.module';
+import { UniversityModule } from './university/university.module';
+import { UsersModule } from './users/users.module';
 const ENV = process.env.NODE_ENV || 'development';
 @Module({
   imports: [
-    AuthModule,
-    UsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
       // envFilePath: ['.env.development', '.env.production'],
       envFilePath: !ENV ? '.env.development' : `.env.${ENV}`,
       load: [appConfig, databaseConfig, jwtConfig],
     }),
-     TypeOrmModule.forRootAsync({
+    TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
@@ -33,6 +32,9 @@ const ENV = process.env.NODE_ENV || 'development';
         synchronize: configService.get('database.synchronize'),
       }),
     }),
+    AuthModule,
+    UsersModule,
+    UniversityModule,
   ],
   controllers: [AppController],
   providers: [AppService],
