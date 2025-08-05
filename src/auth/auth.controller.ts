@@ -1,9 +1,9 @@
 import {
-    Body,
-    ConflictException,
-    Controller,
-    Post,
-    UnauthorizedException,
+  Body,
+  ConflictException,
+  Controller,
+  Post,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from '../users/dto/create-user.dto';
@@ -40,7 +40,7 @@ export class AuthController {
     schema: {
       type: 'object',
       properties: {
-        email: { type: 'string', example: 'nadir@me.com' },
+        email: { type: 'string', example: 'nadir123@me.com' },
         password: { type: 'string', example: 'password123' },
       },
       required: ['email', 'password'],
@@ -62,6 +62,6 @@ export class AuthController {
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    return user;
+    return { access_token: user.access_token, ...user.user };
   }
 }
