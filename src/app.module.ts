@@ -9,6 +9,10 @@ import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
 import { UniversityModule } from './university/university.module';
 import { UsersModule } from './users/users.module';
+import { DepartmentsModule } from './departments/departments.module';
+import { EnrollmentsService } from './enrollments/enrollments.service';
+import { EnrollmentsController } from './enrollments/enrollments.controller';
+import { EnrollmentsModule } from './enrollments/enrollments.module';
 const ENV = process.env.NODE_ENV || 'development';
 @Module({
   imports: [
@@ -34,7 +38,9 @@ const ENV = process.env.NODE_ENV || 'development';
     }),
     AuthModule,
     UsersModule,
+    EnrollmentsModule,
     UniversityModule,
+    DepartmentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
