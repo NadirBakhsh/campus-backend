@@ -23,4 +23,8 @@ export class CampusService {
     const campus = this.campusRepository.create(createCampusDto);
     return this.campusRepository.save(campus);
   }
+
+  findAll() {
+    return this.campusRepository.find();
+  }
 }

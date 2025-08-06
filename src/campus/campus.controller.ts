@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CampusService } from './campus.service';
 import { CreateCampusDto } from './dto/create-campus.dto';
@@ -15,4 +15,12 @@ export class CampusController {
   create(@Body() createCampusDto: CreateCampusDto) {
     return this.campusService.create(createCampusDto);
   }
+
+  @Get()
+  @ApiOperation({ summary: 'Get all campus' })
+  @ApiResponse({ status: 200, description: 'List of campus.' })
+  findAll() {
+    return this.campusService.findAll();
+  }
+
 }
