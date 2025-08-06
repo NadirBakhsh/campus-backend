@@ -10,8 +10,8 @@ export class CampusController {
 
   // create endpoint
   @Post()
-  @ApiOperation({ summary: 'Create a new university' })
-  @ApiResponse({ status: 201, description: 'University created successfully.' })
+  @ApiOperation({ summary: 'Create a new campus' })
+  @ApiResponse({ status: 201, description: 'The campus has been successfully created' })
   create(@Body() createCampusDto: CreateCampusDto) {
     return this.campusService.create(createCampusDto);
   }
