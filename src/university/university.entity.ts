@@ -14,6 +14,4 @@ export class University {
   @Column()
   avatarUrl: string;
 
-  @Column()
-  name: string;
 }

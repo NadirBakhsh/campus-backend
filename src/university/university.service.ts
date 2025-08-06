@@ -1,42 +1,50 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadGatewayException, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateUniversityDto } from './dto/create-university.dto';
 import { UpdateUniversityDto } from './dto/update-university.dto';
+import { University } from './university.entity';
 
 @Injectable()
 export class UniversityService {
-  private universities: Array<CreateUniversityDto & { id: number }> = [];
-  private idCounter = 1;
+  constructor(
+    @InjectRepository(University)
+    private readonly universityRepository: Repository<University>,
+  ) {}
 
-  create(createUniversityDto: CreateUniversityDto) {
-    const university = { id: this.idCounter++, ...createUniversityDto };
-    this.universities.push(university);
-    return university;
+  async create(createUniversityDto: CreateUniversityDto) {
+    const isUniversityExists = await this.universityRepository.findOne({
+      where: { title: createUniversityDto.title },
+    });
+    if (isUniversityExists) {
+      throw new BadGatewayException('University already exists', {
+        description: 'A university with this title already exists.',
+      });
+    }
+    const university = this.universityRepository.create(createUniversityDto);
+    return this.universityRepository.save(university);
   }
 
   findAll() {
-    return this.universities;
+    return this.universityRepository.find();
   }
 
   findOne(id: number) {
-    const university = this.universities.find(u => u.id === id);
-    if (!university) throw new NotFoundException('University not found');
-    return university;
+    return this.universityRepository.findOne({ where: { id } });
   }
 
   update(id: number, updateUniversityDto: UpdateUniversityDto) {
-    const index = this.universities.findIndex(u => u.id === id);
-    if (index === -1) throw new NotFoundException('University not found');
-    this.universities[index] = { 
-      ...this.universities[index], 
-      ...(typeof updateUniversityDto === 'object' && updateUniversityDto !== null ? updateUniversityDto : {}) 
-    };
-    return this.universities[index];
+    return this.universityRepository.update(id, updateUniversityDto);
   }
 
-  remove(id: number) {
-    const index = this.universities.findIndex(u => u.id === id);
-    if (index === -1) throw new NotFoundException('University not found');
-    const removed = this.universities.splice(index, 1);
-    return removed[0];
+  async remove(id: number) {
+    const isUniversityExists = await this.universityRepository.findOne({ where: { id } });
+    if (!isUniversityExists) { 
+      throw new BadGatewayException('University not found', {
+        description: 'No university found with the provided ID.',
+      });
+    }
+    await this.universityRepository.delete(id);
+    return { message: 'University successfully removed', universityId: id };
   }
 }
