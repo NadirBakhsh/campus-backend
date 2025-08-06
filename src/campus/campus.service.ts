@@ -46,4 +46,15 @@ export class CampusService {
     return campus;
   }
 
+  async remove(id: number) {
+    const isCampusExists = await this.campusRepository.findOne({ where: { id } });
+    if (!isCampusExists) { 
+      throw new BadGatewayException('Campus not found', {
+        description: 'No campus found with the provided ID.',
+      });
+    }
+    await this.campusRepository.delete(id);
+    return { message: 'Campus successfully removed', campusId: id };
+  }
+
 }
