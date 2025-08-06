@@ -46,6 +46,17 @@ export class CampusService {
     return campus;
   }
 
+  async update(id: number, updateCampusDto: CreateCampusDto) {
+    const isCampusExists = await this.campusRepository.findOne({ where: { id } });
+    if (!isCampusExists) {
+      throw new BadGatewayException('Campus not found', {
+        description: 'No campus found with the provided ID.',
+      });
+    }
+    await this.campusRepository.update(id, updateCampusDto);
+    return this.findOne(id);
+  }
+
   async remove(id: number) {
     const isCampusExists = await this.campusRepository.findOne({ where: { id } });
     if (!isCampusExists) { 

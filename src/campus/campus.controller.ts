@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CampusService } from './campus.service';
 import { CreateCampusDto } from './dto/create-campus.dto';
@@ -30,6 +30,15 @@ export class CampusController {
   @ApiResponse({ status: 404, description: 'Campus not found.' })
   findOne(@Param('id') id: string) {
     return this.campusService.findOne(+id);
+  }
+
+  @Patch(':id')
+  @ApiOperation({ summary: 'Update campus by ID' })
+  @ApiParam({ name: 'id', description: 'Campus ID' })
+  @ApiResponse({ status: 200, description: 'Campus updated.' })
+  @ApiResponse({ status: 404, description: 'Campus not found.' })
+  update(@Param('id') id: string, @Body() updateCampusDto: CreateCampusDto) {
+    return this.campusService.update(+id, updateCampusDto);
   }
 
   @Delete(':id')
