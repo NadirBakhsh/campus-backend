@@ -16,6 +16,7 @@ import { EventModule } from './event/event.module';
 import { ClubModule } from './club/club.module';
 import { UserClubModule } from './user-club/user-club.module';
 import { AcademicModule } from './academic/academic.module';
+import { ContactModule } from './contact/contact.module';
 const ENV = process.env.NODE_ENV || 'development';
 @Module({
   imports: [
@@ -49,6 +50,7 @@ const ENV = process.env.NODE_ENV || 'development';
     ClubModule,
     UserClubModule,
     AcademicModule,
+    ContactModule,
   ],
   controllers: [AppController],
   providers: [AppService],
