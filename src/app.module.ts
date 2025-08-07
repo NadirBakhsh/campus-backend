@@ -11,6 +11,7 @@ import jwtConfig from './config/jwt.config';
 import { EnrollmentModule } from './enrollment/enrollment.module';
 import { UniversityModule } from './university/university.module';
 import { UsersModule } from './users/users.module';
+import { DepartmentModule } from './department/department.module';
 const ENV = process.env.NODE_ENV || 'development';
 @Module({
   imports: [
@@ -39,6 +40,7 @@ const ENV = process.env.NODE_ENV || 'development';
     EnrollmentModule,
     UniversityModule,
     CampusModule,
+    DepartmentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
