@@ -4,17 +4,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { CampusModule } from './campus/campus.module';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
+import { EnrollmentModule } from './enrollment/enrollment.module';
 import { UniversityModule } from './university/university.module';
 import { UsersModule } from './users/users.module';
-import { DepartmentsModule } from './departments/departments.module';
-import { EnrollmentsService } from './enrollments/enrollments.service';
-import { EnrollmentsController } from './enrollments/enrollments.controller';
-import { EnrollmentsModule } from './enrollments/enrollments.module';
-import { CampusModule } from './campus/campus.module';
-import { EnrollmentModule } from './enrollment/enrollment.module';
 const ENV = process.env.NODE_ENV || 'development';
 @Module({
   imports: [
@@ -43,8 +39,6 @@ const ENV = process.env.NODE_ENV || 'development';
     EnrollmentModule,
     UniversityModule,
     CampusModule,
-    EnrollmentsModule,
-    DepartmentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
