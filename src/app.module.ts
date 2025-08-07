@@ -14,6 +14,7 @@ import { EnrollmentsService } from './enrollments/enrollments.service';
 import { EnrollmentsController } from './enrollments/enrollments.controller';
 import { EnrollmentsModule } from './enrollments/enrollments.module';
 import { CampusModule } from './campus/campus.module';
+import { EnrollmentModule } from './enrollment/enrollment.module';
 const ENV = process.env.NODE_ENV || 'development';
 @Module({
   imports: [
@@ -39,6 +40,7 @@ const ENV = process.env.NODE_ENV || 'development';
     }),
     AuthModule,
     UsersModule,
+    EnrollmentModule,
     UniversityModule,
     CampusModule,
     EnrollmentsModule,
