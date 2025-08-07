@@ -12,6 +12,7 @@ import { EnrollmentModule } from './enrollment/enrollment.module';
 import { UniversityModule } from './university/university.module';
 import { UsersModule } from './users/users.module';
 import { DepartmentModule } from './department/department.module';
+import { EventModule } from './event/event.module';
 const ENV = process.env.NODE_ENV || 'development';
 @Module({
   imports: [
@@ -41,6 +42,7 @@ const ENV = process.env.NODE_ENV || 'development';
     UniversityModule,
     CampusModule,
     DepartmentModule,
+    EventModule,
   ],
   controllers: [AppController],
   providers: [AppService],
