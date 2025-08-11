@@ -1,4 +1,5 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
+import { UserRole } from 'src/_common/enums';
 
 export class UpdateUserDto {
   @ApiPropertyOptional()
@@ -14,7 +15,7 @@ export class UpdateUserDto {
   password?: string;
 
   @ApiPropertyOptional()
-  role?: string;
+  role?: UserRole;
 
   @ApiPropertyOptional()
   status?: string;
