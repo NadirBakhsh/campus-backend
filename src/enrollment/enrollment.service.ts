@@ -24,8 +24,14 @@ export class EnrollmentService {
     return this.enrollmentRepository.save(enrollment);
   }
 
-  findAll() {
-    return `This action returns all enrollment`;
+  async findAll() {
+    try {
+      return await this.enrollmentRepository.find();
+    } catch (error) {
+      throw new BadRequestException('Failed to retrieve enrollments', {
+        description: 'An error occurred while fetching the enrollment list.',
+      });
+    }
   }
 
   findOne(id: number) {
