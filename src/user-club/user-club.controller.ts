@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UserClubService } from './user-club.service';
 import { CreateUserClubDto } from './dto/create-user-club.dto';
 import { UpdateUserClubDto } from './dto/update-user-club.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User Club')
 @Controller('user-club')
 export class UserClubController {
   constructor(private readonly userClubService: UserClubService) {}
