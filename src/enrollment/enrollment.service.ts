@@ -13,7 +13,10 @@ export class EnrollmentService {
   ) {}
   async create(createEnrollmentDto: CreateEnrollmentDto) {
     const isStudentExists = await this.enrollmentRepository.findOne({
-      where: { rollNo: createEnrollmentDto.rollNo, studentId: createEnrollmentDto.studentId },
+      where: {
+        rollNo: createEnrollmentDto.rollNo,
+        studentId: createEnrollmentDto.studentId,
+      },
     });
     if (isStudentExists) {
       throw new BadRequestException('Student already enrolled', {
@@ -34,15 +37,41 @@ export class EnrollmentService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} enrollment`;
+  async findOne(id: number) {
+    const enrollment = await this.enrollmentRepository.findOne({
+      where: { id },
+    });
+    if (!enrollment) {
+      throw new BadRequestException('Enrollment not found', {
+        description: `No enrollment found with the provided ID ${id}.`,
+      });
+    }
+    return enrollment;
   }
 
-  update(id: number, updateEnrollmentDto: UpdateEnrollmentDto) {
-    return `This action updates a #${id} enrollment`;
+  async update(id: number, updateEnrollmentDto: UpdateEnrollmentDto) {
+    const enrollment = await this.enrollmentRepository.findOne({
+      where: { id },
+    });
+    if (!enrollment) {
+      throw new BadRequestException('Enrollment not found', {
+        description: `No enrollment found with the provided ID ${id}.`,
+      });
+    }
+    await this.enrollmentRepository.update(id, updateEnrollmentDto);
+    return this.findOne(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} enrollment`;
+  async remove(id: number) {
+    const enrollment = await this.enrollmentRepository.findOne({
+      where: { id },
+    });
+    if (!enrollment) {
+      throw new BadRequestException('Enrollment not found', {
+        description: `No enrollment found with the provided ID ${id}.`,
+      });
+    }
+    await this.enrollmentRepository.delete(id);
+    return { message: 'Enrollment successfully removed', enrollmentId: id };
   }
 }
