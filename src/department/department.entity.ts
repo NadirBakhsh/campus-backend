@@ -1,14 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
-import { University } from '../university/university.entity'
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Department {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
+  @ApiProperty()
   @Column()
-  universityId: number
+  universityId: number;
 
+  @ApiProperty()
   @Column()
-  title: string
+  title: string;
 }
