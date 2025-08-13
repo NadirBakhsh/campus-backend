@@ -20,6 +20,7 @@ import { ContactModule } from './contact/contact.module';
 import { DiscussionModule } from './discussion/discussion.module';
 import { NotificationModule } from './notification/notification.module';
 import { Club_ChatModule } from './club_chat/club_chat.module';
+import { Discussion_ChatModule } from './discussion_chat/discussion_chat.module';
 const ENV = process.env.NODE_ENV || 'development';
 @Module({
   imports: [
@@ -56,6 +57,7 @@ const ENV = process.env.NODE_ENV || 'development';
     AcademicModule,
     ContactModule,
     DiscussionModule,
+    Discussion_ChatModule,
     NotificationModule,
   ],
   controllers: [AppController],
