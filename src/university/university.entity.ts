@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/users/user.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class University {
@@ -19,4 +20,7 @@ export class University {
   @ApiProperty()
   @Column()
   avatarUrl: string;
+
+  @ManyToOne(() => User, user => user.adminUniversities)
+  admin: User;
 }

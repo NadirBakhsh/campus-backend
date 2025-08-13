@@ -1,8 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserRole } from 'src/_common/enums';
-import { Enrollment } from 'src/enrollment/enrollment.entity';
-
+import { University } from '../university/university.entity';
 @Entity()
 export class User {
   @ApiProperty()
@@ -32,5 +31,8 @@ export class User {
   @ApiProperty()
   @Column()
   status: string;
+
+  @OneToMany(() => University, university => university.admin)
+  adminUniversities: University[];
 
 }
