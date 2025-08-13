@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { User } from 'src/users/user.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity()
 export class University {
@@ -9,10 +9,10 @@ export class University {
   id: number;
 
   @ApiProperty()
-  @Column()
-  adminId: number;
+  @ManyToOne(() => User, user => user.adminUniversities)
+  @JoinColumn({ name: 'adminId' })
+  admin: User;
 
-  @ApiProperty()
   @ApiProperty()
   @Column()
   title: string;
@@ -20,7 +20,5 @@ export class University {
   @ApiProperty()
   @Column()
   avatarUrl: string;
-
-  @ManyToOne(() => User, user => user.adminUniversities)
-  admin: User;
 }
+
