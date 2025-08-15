@@ -27,4 +27,7 @@ export class Contact {
     @ApiProperty()
     @Column()
     category: string; // e.g., Admissions/Finance/Support
+
+    @ManyToOne(() => University, university => university.contacts)
+    university: University;
 }
