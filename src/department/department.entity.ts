@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { University } from 'src/university/university.entity';
 
@@ -9,11 +15,14 @@ export class Department {
   id: number;
 
   @ApiProperty()
-  @ManyToOne(() => University, university => university.departments)
-  @JoinColumn({ name: 'universityId' })
-  university: University;
+  @Column()
+  universityId: number;
 
   @ApiProperty()
   @Column()
   title: string;
+
+  @ApiProperty()
+  @ManyToOne(() => University, (university) => university.departments)
+  university: University;
 }

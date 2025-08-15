@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { University } from 'src/university/university.entity';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Campus {
@@ -30,4 +31,8 @@ export class Campus {
   @ApiProperty()
   @Column('decimal', { precision: 10, scale: 6 })
   longitude: number;
+
+  @ManyToOne(() => University, university => university.campuses)
+  university: University;
+  
 }

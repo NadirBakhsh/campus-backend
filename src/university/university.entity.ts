@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Campus } from 'src/campus/campus.entity';
 import { Department } from 'src/department/department.entity';
 import { User } from 'src/users/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
@@ -26,4 +27,8 @@ export class University {
 
   @OneToMany(() => Department, department => department.university)
   departments: Department[];
+
+  @OneToMany(() => Campus, campus => campus.university)
+  campuses: Campus[];
+
 }

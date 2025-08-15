@@ -26,7 +26,7 @@ export class UniversityService {
   }
 
   findAll() {
-    return this.universityRepository.find();
+    return this.universityRepository.find({ relations: { campuses:true}});
   }
 
   findOne(id: number) {
