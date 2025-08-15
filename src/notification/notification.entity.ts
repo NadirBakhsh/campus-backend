@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, PrimaryGeneratedColumn, Column, Index } from 'typeorm';
+import { University } from 'src/university/university.entity';
+import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'notifications' })
 export class Notification {
@@ -24,4 +25,7 @@ export class Notification {
   @ApiProperty()
   @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   date: Date;
+
+  @ManyToOne(() => University, (university) => university.notifications)
+  university: University[];
 }

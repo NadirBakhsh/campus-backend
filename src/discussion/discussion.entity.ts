@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { University } from 'src/university/university.entity';
+import { Column, Entity, Index, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'discussions' })
 export class Discussion {
@@ -23,4 +24,8 @@ export class Discussion {
   @ApiProperty()
   @Column({ type: 'boolean', default: true })
   isActive: boolean;
+
+  @ManyToOne(() => University, (university) => university.discussions)
+  university: University;
+
 }
