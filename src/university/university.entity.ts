@@ -3,6 +3,7 @@ import { Campus } from 'src/campus/campus.entity';
 import { Contact } from 'src/contact/contact.entity';
 import { Department } from 'src/department/department.entity';
 import { Discussion } from 'src/discussion/discussion.entity';
+import { Enrollment } from 'src/enrollment/enrollment.entity';
 import { Notification } from 'src/notification/notification.entity';
 import { User } from 'src/users/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn, OneToOne } from 'typeorm';
@@ -27,6 +28,9 @@ export class University {
 
   @ManyToOne(() => User, user => user.adminUniversities)
   admin: User;
+
+  @OneToMany(() => Enrollment, enrollment => enrollment.university)
+  enrollments: Enrollment[];
 
   @OneToMany(() => Department, department => department.university)
   departments: Department[];
