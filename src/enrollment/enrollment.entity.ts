@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Academic } from 'src/academic/academic.entity';
 import { Campus } from 'src/campus/campus.entity';
 import { Department } from 'src/department/department.entity';
 import { University } from 'src/university/university.entity';
 import { User } from 'src/users/user.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne } from 'typeorm';
 
 @Entity()
 export class Enrollment {
@@ -50,5 +51,8 @@ export class Enrollment {
 
   @ManyToOne(() => Department, department => department.enrollments)
   department: Department[];
+
+  @OneToOne(() => Academic, academic => academic.enrollment)
+  academic: Academic;
 
 }
