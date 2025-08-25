@@ -1,5 +1,5 @@
 import { Enrollment } from 'src/enrollment/enrollment.entity';
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity({ name: 'academics' })
 export class Academic {
@@ -24,7 +24,8 @@ export class Academic {
   @Column({ type: 'smallint' })
   semester: number;
 
-   @OneToOne(() => Enrollment, enrollment => enrollment.academic)
-    enrollment: Enrollment;
-
+  @OneToOne(() => Enrollment, enrollment => enrollment.academic)
+  @JoinColumn({ name: 'enrollmentId' })
+  enrollment: Enrollment;
 }
+

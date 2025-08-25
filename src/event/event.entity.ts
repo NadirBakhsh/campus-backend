@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { University } from 'src/university/university.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Event {
@@ -38,4 +39,7 @@ export class Event {
   @ApiProperty()
   @Column({ nullable: true })
   bannerUrl: string;
+
+  @ManyToOne(() => University, university => university.events)
+    university: University;
 }

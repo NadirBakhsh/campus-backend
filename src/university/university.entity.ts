@@ -6,6 +6,7 @@ import { Discussion } from 'src/discussion/discussion.entity';
 import { Enrollment } from 'src/enrollment/enrollment.entity';
 import { Notification } from 'src/notification/notification.entity';
 import { User } from 'src/users/user.entity';
+import { Event } from 'src/event/event.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn, OneToOne } from 'typeorm';
 
 @Entity()
@@ -46,6 +47,7 @@ export class University {
   
   @OneToMany(() => Notification, notification => notification.university)
   notifications: Notification[];
-  
 
+  @OneToMany(() => Event, event => event.university)
+  events: Event[];
 }

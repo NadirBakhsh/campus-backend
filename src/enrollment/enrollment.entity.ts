@@ -4,7 +4,7 @@ import { Campus } from 'src/campus/campus.entity';
 import { Department } from 'src/department/department.entity';
 import { University } from 'src/university/university.entity';
 import { User } from 'src/users/user.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity()
 export class Enrollment {
@@ -53,6 +53,7 @@ export class Enrollment {
   department: Department[];
 
   @OneToOne(() => Academic, academic => academic.enrollment)
+  @JoinColumn({ name: 'academicId' }) // Adjust the column name if needed
   academic: Academic;
 
 }
