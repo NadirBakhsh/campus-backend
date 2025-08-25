@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { UserRole } from 'src/_common/enums';
 import { University } from '../university/university.entity';
 import { Enrollment } from 'src/enrollment/enrollment.entity';
+import { UserClub } from '../user-club/user-club.entity';
 @Entity()
 export class User {
   @ApiProperty()
@@ -38,5 +39,8 @@ export class User {
 
   @OneToMany(() => Enrollment, enrollment => enrollment.users)
   enrollments: Enrollment[];
+
+  @OneToMany(() => UserClub, userClub => userClub.user)
+  userClubs: UserClub[];
 
 }

@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { UserClub } from '../user-club/user-club.entity';
 
 @Entity()
 export class Club {
@@ -26,4 +27,7 @@ export class Club {
   @ApiProperty()
   @Column({ nullable: true })
   bannerUrl: string;
+
+  @OneToMany(() => UserClub, userClub => userClub.club)
+  userClubs: UserClub[];
 }

@@ -19,6 +19,7 @@ import { ContactModule } from './contact/contact.module';
 import { DiscussionModule } from './discussion/discussion.module';
 import { NotificationModule } from './notification/notification.module';
 import { Club_ChatModule } from './club_chat/club_chat.module';
+import { UserClubModule } from './user-club/user-club.module';
 import { Discussion_ChatModule } from './discussion_chat/discussion_chat.module';
 const ENV = process.env.NODE_ENV || 'development';
 @Module({
@@ -52,6 +53,7 @@ const ENV = process.env.NODE_ENV || 'development';
     EventModule,
     ClubModule,
     Club_ChatModule,
+    UserClubModule,
     AcademicModule,
     ContactModule,
     DiscussionModule,
