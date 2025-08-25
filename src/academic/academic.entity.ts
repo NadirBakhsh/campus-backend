@@ -25,6 +25,6 @@ export class Academic {
   semester: number;
 
    @OneToOne(() => Enrollment, enrollment => enrollment.academic)
-    academic: Academic;
+    enrollment: Enrollment;
 
 }
