@@ -14,7 +14,6 @@ import { UsersModule } from './users/users.module';
 import { DepartmentModule } from './department/department.module';
 import { EventModule } from './event/event.module';
 import { ClubModule } from './club/club.module';
-import { UserClubModule } from './user-club/user-club.module';
 import { AcademicModule } from './academic/academic.module';
 import { ContactModule } from './contact/contact.module';
 import { DiscussionModule } from './discussion/discussion.module';
@@ -52,7 +51,6 @@ const ENV = process.env.NODE_ENV || 'development';
     DepartmentModule,
     EventModule,
     ClubModule,
-    UserClubModule,
     Club_ChatModule,
     AcademicModule,
     ContactModule,
