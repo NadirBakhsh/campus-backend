@@ -4,6 +4,8 @@ import { UserRole } from 'src/_common/enums';
 import { University } from '../university/university.entity';
 import { Enrollment } from 'src/enrollment/enrollment.entity';
 import { UserClub } from '../user-club/user-club.entity';
+import { UserDiscussion } from '../user-discussion/user-discussion.entity';
+import { DiscussionChat } from '../discussion_chat/discussion_chat.entity';
 @Entity()
 export class User {
   @ApiProperty()
@@ -42,5 +44,11 @@ export class User {
 
   @OneToMany(() => UserClub, userClub => userClub.user)
   userClubs: UserClub[];
+
+  @OneToMany(() => DiscussionChat, discussionChat => discussionChat.sender)
+  discussionChats: DiscussionChat[];
+
+  @OneToMany(() => UserDiscussion, userDiscussion => userDiscussion.user)
+  userDiscussions: UserDiscussion[];
 
 }

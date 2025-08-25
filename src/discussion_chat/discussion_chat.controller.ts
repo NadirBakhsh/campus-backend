@@ -3,7 +3,7 @@ import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/s
 import { Discussion_ChatService } from './discussion_chat.service';
 import { CreateDiscussion_ChatDto } from './dto/create-discussion_chat.dto';
 import { UpdateDiscussion_ChatDto } from './dto/update-discussion_chat.dto';
-import { Discussion_Chat } from './discussion_chat.entity';
+import { DiscussionChat } from './discussion_chat.entity';
 
 @ApiTags('discussion chat')
 @Controller('discussion_chat')
@@ -13,14 +13,14 @@ export class Discussion_ChatController {
   @Post()
   @ApiOperation({ summary: 'Create a new discussion chat' })
   @ApiBody({ type: CreateDiscussion_ChatDto })
-  @ApiResponse({ status: 201, description: 'Discussion chat created', type: Discussion_Chat })
+  @ApiResponse({ status: 201, description: 'Discussion chat created', type: DiscussionChat })
   create(@Body() createDto: CreateDiscussion_ChatDto) {
     return this.discussionChatService.create(createDto);
   }
 
   @Get()
   @ApiOperation({ summary: 'Get all discussion chats' })
-  @ApiResponse({ status: 200, description: 'List of discussion chats', type: [Discussion_Chat] })
+  @ApiResponse({ status: 200, description: 'List of discussion chats', type: [DiscussionChat] })
   findAll() {
     return this.discussionChatService.findAll();
   }
@@ -28,7 +28,7 @@ export class Discussion_ChatController {
   @Get(':id')
   @ApiOperation({ summary: 'Get a discussion chat by id' })
   @ApiParam({ name: 'id', type: Number })
-  @ApiResponse({ status: 200, description: 'The found discussion chat', type: Discussion_Chat })
+  @ApiResponse({ status: 200, description: 'The found discussion chat', type: DiscussionChat })
   @ApiResponse({ status: 404, description: 'Discussion chat not found' })
   findOne(@Param('id') id: string) {
     return this.discussionChatService.findOne(+id);
@@ -38,7 +38,7 @@ export class Discussion_ChatController {
   @ApiOperation({ summary: 'Update a discussion chat by id' })
   @ApiParam({ name: 'id', type: Number })
   @ApiBody({ type: UpdateDiscussion_ChatDto })
-  @ApiResponse({ status: 200, description: 'The updated discussion chat', type: Discussion_Chat })
+  @ApiResponse({ status: 200, description: 'The updated discussion chat', type: DiscussionChat })
   @ApiResponse({ status: 404, description: 'Discussion chat not found' })
   update(@Param('id') id: string, @Body() updateDto: UpdateDiscussion_ChatDto) {
     return this.discussionChatService.update(+id, updateDto);

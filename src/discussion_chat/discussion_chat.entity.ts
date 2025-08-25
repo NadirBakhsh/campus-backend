@@ -1,8 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { User } from '../users/user.entity';
+import { Discussion } from '../discussion/discussion.entity';
 
-@Entity()
-export class Discussion_Chat {
+@Entity('discussion_chat')
+export class DiscussionChat {
   @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
@@ -13,9 +15,21 @@ export class Discussion_Chat {
 
   @ApiProperty()
   @Column()
+  discussionId: number;
+
+  @ApiProperty()
+  @Column()
   message: string;
 
   @ApiProperty()
   @Column()
   date: Date;
+
+  @ManyToOne(() => User, user => user.discussionChats)
+  @JoinColumn({ name: 'senderId' })
+  sender: User;
+
+  @ManyToOne(() => Discussion, discussion => discussion.discussionChats)
+  @JoinColumn({ name: 'discussionId' })
+  discussion: Discussion;
 }

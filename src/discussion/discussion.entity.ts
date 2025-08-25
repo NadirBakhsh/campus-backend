@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { University } from 'src/university/university.entity';
-import { Column, Entity, Index, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, ManyToOne, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { UserDiscussion } from '../user-discussion/user-discussion.entity';
+import { DiscussionChat } from '../discussion_chat/discussion_chat.entity';
 
 @Entity({ name: 'discussions' })
 export class Discussion {
@@ -28,4 +30,9 @@ export class Discussion {
   @ManyToOne(() => University, (university) => university.discussions)
   university: University;
 
+  @OneToMany(() => UserDiscussion, userDiscussion => userDiscussion.discussion)
+  userDiscussions: UserDiscussion[];
+
+  @OneToMany(() => DiscussionChat, discussionChat => discussionChat.discussion)
+  discussionChats: DiscussionChat[];
 }

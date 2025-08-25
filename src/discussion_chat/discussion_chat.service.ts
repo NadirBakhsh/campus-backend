@@ -1,15 +1,15 @@
 import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Discussion_Chat } from './discussion_chat.entity';
+import { DiscussionChat } from './discussion_chat.entity';
 import { CreateDiscussion_ChatDto } from './dto/create-discussion_chat.dto';
 import { UpdateDiscussion_ChatDto } from './dto/update-discussion_chat.dto';
 
 @Injectable()
 export class Discussion_ChatService {
   constructor(
-    @InjectRepository(Discussion_Chat)
-    private readonly discussionChatRepository: Repository<Discussion_Chat>,
+    @InjectRepository(DiscussionChat)
+    private readonly discussionChatRepository: Repository<DiscussionChat>,
   ) {}
 
   async create(createDto: CreateDiscussion_ChatDto) {
